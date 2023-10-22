@@ -18,7 +18,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh "curl -sSL https://dl.google.com/go/go$GO_VERSION.linux-amd64.tar.gz | tar -C /usr/local -xz"
+                sh "curl -O -L https://golang.org/dl/go1.18.1.linux-amd64.tar.gz | tar -C /usr/local -xz"
                 sh 'export PATH=$PATH:/usr/local/go/bin'
                 sh 'go version'
 		sh 'go get github.com/gorilla/mux'
