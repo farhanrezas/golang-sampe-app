@@ -4,9 +4,20 @@ pipeline {
     }
     environment {
         GO_VERSION = "1.18.1"  // Update with your desired Go version
+	GOPATH = '/var/jenkins_home/go'
     }
 
     stages {
+	stage('Install Go') {
+            steps {
+                script {
+                    sh "mkdir -p $GOPATH"
+                    sh "curl -sSL https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz"
+		    sh "tar -xvf go$GO_VERSION.linux-amd64.tar.gz -C $GOPATH"
+                    sh "export PATH=$GOPATH/go/bin:$PATH"
+                }
+            }
+        }
         stage('Checkout') {
             steps {
                 checkout scm
