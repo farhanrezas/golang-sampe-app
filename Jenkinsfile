@@ -58,7 +58,6 @@ pipeline {
                 sh 'go version'
                 sh 'go get github.com/gorilla/mux'
                 sh 'go build -o go-sample-app'
-                sh './go-sample-app'
             }
         }
 
@@ -75,7 +74,7 @@ pipeline {
                     image.inside {
                         sh 'cp go-sample-app /app/go-sample-app'
                     }
-                    image.push()
+                    image.push("minikube:5000/go-sample-app:${env.BUILD_NUMBER}")
                 }
             }
         }

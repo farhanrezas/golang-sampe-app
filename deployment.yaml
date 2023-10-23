@@ -17,6 +17,6 @@ spec:
     spec:
       containers:
       - name: go-sample-app
-        image: go-sample-app:latest  # Use the image tag from Jenkins
+        image: minikube:5000/go-sample-app:${env.BUILD_NUMBER}  # Use the image tag from Jenkins
         ports:
         - containerPort: 8070  # Update with the port your Go application listens on
