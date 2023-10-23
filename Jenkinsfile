@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            // Define the label used to select a Kubernetes node to run the job
+            label 'minikube'
+        }
+    }
 
     environment {
         GO_VERSION = "1.18.1"  // Update with your desired Go version
