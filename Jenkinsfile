@@ -1,20 +1,8 @@
 pipeline {
     agent {
         kubernetes {
-          // Define the label used to select a Kubernetes node to run the job
-          yaml """
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      labels:
-        app: jenkins-slave
-    spec:
-      containers:
-        - name: jnlp
-          image: jenkins/jnlp-slave:latest
-          securityContext:
-            privileged: true
-    """
+            // Define the label used to select a Kubernetes node to run the job
+            label 'minikube'
         }
     }
 
@@ -27,6 +15,7 @@ pipeline {
 	stage('Install Go') {
             steps {
                 script {
+                    sh "sleep 100"
                     sh "mkdir -p $GOPATH"
                     sh "curl -O -L https://golang.org/dl/go1.18.1.linux-amd64.tar.gz"
 		    sh "tar -xvf go1.18.1.linux-amd64.tar.gz -C $GOPATH"
