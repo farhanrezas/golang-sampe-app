@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: go-sample-app
+  namespace: jenkins
   labels:
     app: go-sample-app
 spec:
@@ -16,6 +17,6 @@ spec:
     spec:
       containers:
       - name: go-sample-app
-        image: go-sample-app:${BUILD_NUMBER}  # Use the image tag from Jenkins
+        image: go-sample-app:latest  # Use the image tag from Jenkins
         ports:
         - containerPort: 8070  # Update with the port your Go application listens on

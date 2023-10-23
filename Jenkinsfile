@@ -73,7 +73,7 @@ pipeline {
                 script {
                     def image = docker.build("go-sample-app:${env.BUILD_NUMBER}")
                     image.inside {
-                        sh 'cp golang-sample-app /app/golang-sample-app'
+                        sh 'cp go-sample-app /app/go-sample-app'
                     }
                     image.push()
                 }
