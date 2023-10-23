@@ -1,8 +1,20 @@
 pipeline {
     agent {
         kubernetes {
-            // Define the label used to select a Kubernetes node to run the job
-            label 'minikube'
+          // Define the label used to select a Kubernetes node to run the job
+          yaml """
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      labels:
+        app: jenkins-slave
+    spec:
+      containers:
+        - name: jnlp
+          image: jenkins/jnlp-slave:latest
+	  securityContext:
+            privileged: true
+    """
         }
     }
 
