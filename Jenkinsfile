@@ -12,7 +12,7 @@ pipeline {
       containers:
         - name: jnlp
           image: jenkins/jnlp-slave:latest
-	  securityContext:
+          securityContext:
             privileged: true
     """
         }
