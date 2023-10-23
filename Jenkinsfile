@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        kubernetes {
-            // Define the label used to select a Kubernetes node to run the job
-            label 'minikube'
-        }
+        label "local"
     }
     environment {
         GO_VERSION = "1.18.1"  // Update with your desired Go version
@@ -18,7 +15,10 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'go version'
+                sh 'curl -O -L https://golang.org/dl/go1.18.1.linux-amd64.tar.gz'
+		sh 'tar -xvf go1.18.1.linux-amd64.tar.gz -C /usr/local'
+		sh 'sudo tar -xvf go1.18.1.linux-amd64.tar.gz -C /usr/local'
+		sh 'go version'
 		sh 'go get github.com/gorilla/mux'
                 sh 'go build -o go-sample-app'
 		sh './go-sample-app'
