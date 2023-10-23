@@ -1,7 +1,6 @@
 pipeline {
-    agent {
-        label "local"
-    }
+    agent any
+
     environment {
         GO_VERSION = "1.18.1"  // Update with your desired Go version
 	GOPATH = '/var/jenkins_home/go'
@@ -12,8 +11,8 @@ pipeline {
             steps {
                 script {
                     sh "mkdir -p $GOPATH"
-                    sh "curl -sSL https://golang.org/dl/go$GO_VERSION.linux-amd64.tar.gz"
-		    sh "tar -xvf go$GO_VERSION.linux-amd64.tar.gz -C $GOPATH"
+                    sh "curl -O -L https://golang.org/dl/go1.18.1.linux-amd64.tar.gz"
+		    sh "tar -xvf go1.18.1.linux-amd64.tar.gz -C $GOPATH"
                     sh "export PATH=$GOPATH/go/bin:$PATH"
                 }
             }
